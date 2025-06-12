@@ -1,7 +1,8 @@
 # Smart Parking Space Detector
 
-This project is a computer vision-based parking space monitoring system that detects and visualizes available parking spots using OpenCV and Python. It processes live or recorded video feeds to highlight free vs. occupied parking spaces with real-time updates.
+The Parking_Space_Detector is a Python-based computer vision project that detects available parking spots in a parking lot using a static overhead video feed. It uses OpenCV for image processing and allows users to define parking zones manually, then continuously analyzes whether each spot is occupied or free based on pixel analysis.
 
+This solution can be useful for smart parking systems, mall/office parking monitoring, or integrating into IoT-based parking guidance apps.
 ## 🔧 Features
 
 - Detects free and occupied parking slots from video footage
@@ -40,3 +41,59 @@ This project is a computer vision-based parking space monitoring system that det
 Install dependencies via pip:
 ```bash
 pip install opencv-python cvzone numpy
+
+
+
+## Purpose of Each File 
+**1. createpolygons.py:**
+To manually define the parking space regions in a frame of the parking video.
+
+How it works:
+
+> Loads an image (carParkImg.png).
+
+> Allows the user to draw polygons using mouse clicks. [Right click = Add & Left Click = Delete]
+
+> Saves the polygon coordinates in a file called CarParkPos. and Polygons 
+
+This file is run only once to set up the layout of the parking spots.
+**➡️ This lets your detector adapt to any parking layout**
+
+
+**createpolygons.py	Define parking spot coordinates manually using mouse input
+CarParkPos	Stores saved polygon coordinates for each parking space
+checkParkingSpace()	Detects if space is free or occupied based on pixel analysis
+polygons / posList	List of all defined parking spot polygons used for detection**
+
+**2. main.py**
+ To analyze a video frame-by-frame and detect which parking spaces are occupied or free.
+
+How it works:
+
+Loads a parking video (carPark.mp4) and predefined parking space polygons from CarParkPos.
+
+Converts each frame to grayscale, applies Gaussian blur, and adaptive thresholding.
+
+For each parking space polygon:
+
+Crops the region of interest (ROI).
+
+Calculates the number of non-zero pixels.
+
+Compares it against a threshold to detect whether the spot is free or occupied.
+
+Overlays green or red polygons on the video to indicate free or occupied spots.
+
+Displays the total count of free spaces in the top-left corner.
+**
+3. parkingspace.py**
+
+Purpose:
+Contains the helper functions used in main.py — specifically for processing each parking spot polygon.
+
+What it includes:
+
+checkParkingSpace(): Given a frame and polygon points, it processes the region and checks occupancy.
+
+Handles pixel counting and drawing overlays.
+
