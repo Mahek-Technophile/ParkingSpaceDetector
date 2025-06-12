@@ -39,13 +39,12 @@ This solution can be useful for smart parking systems, mall/office parking monit
 ## 📌 Requirements
 
 Install dependencies via pip:
-```bash
-pip install opencv-python cvzone numpy
 
+pip install opencv-python cvzone numpy 
 
+# Detailed Overview & Purpose of Each File
 
-## Purpose of Each File 
-**1. createpolygons.py:**
+## 1. createpolygons.py:
 To manually define the parking space regions in a frame of the parking video.
 
 How it works:
@@ -60,12 +59,12 @@ This file is run only once to set up the layout of the parking spots.
 **➡️ This lets your detector adapt to any parking layout**
 
 
-**createpolygons.py	Define parking spot coordinates manually using mouse input
-CarParkPos	Stores saved polygon coordinates for each parking space
-checkParkingSpace()	Detects if space is free or occupied based on pixel analysis
-polygons / posList	List of all defined parking spot polygons used for detection**
+**createpolygons.py                  	Define parking spot coordinates manually using mouse input
+CarParkPos	                           Stores saved polygon coordinates for each parking space
+checkParkingSpace()	                  Detects if space is free or occupied based on pixel analysis
+polygons / posList	                   List of all defined parking spot polygons used for detection**
 
-**2. main.py**
+## 2. main.py
  To analyze a video frame-by-frame and detect which parking spaces are occupied or free.
 
 How it works:
@@ -97,3 +96,31 @@ checkParkingSpace(): Given a frame and polygon points, it processes the region a
 
 Handles pixel counting and drawing overlays.
 
+
+## 🧱 Detailed Tech Stack Overview
+✅ 1. Programming Language
+Python
+
+Core language used for image processing, video analysis, and logic implementation.
+
+🧰 2. Libraries & Frameworks
+Library	Purpose
+OpenCV	Core image & video processing (grayscale, blur, thresholding, masking)
+pickle	Saving and loading parking spot coordinates (as binary data)
+NumPy	(Optional/implicitly used by OpenCV) Efficient array/matrix operations
+
+📂 3. Project Files
+createpolygons.py → Interactive tool to define parking zones (GUI using OpenCV mouse events).
+
+main.py → Video loop and live analysis of each frame.
+
+parkingspace.py → Modular detection logic for each parking spot.
+
+🎥 4. Input Media
+.mp4 Video file → Pre-recorded parking lot footage
+
+.png Image file → For selecting parking space regions
+
+📦 5. Storage / Data
+Binary file (CarParkPos) → Stores all polygon coordinates of parking spots
+ 
