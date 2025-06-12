@@ -85,8 +85,8 @@ Compares it against a threshold to detect whether the spot is free or occupied.
 Overlays green or red polygons on the video to indicate free or occupied spots.
 
 Displays the total count of free spaces in the top-left corner.
-**
-3. parkingspace.py**
+
+## 3. parkingspace.py
 
 Purpose:
 Contains the helper functions used in main.py — specifically for processing each parking spot polygon.
